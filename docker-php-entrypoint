@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+_DIR_HTML="/var/www/html/"
+_DIR_WIKI="/var/www/wiki/"
+_FILE_SYNC="/var/www/synced"
+
+if [ -d "${_DIR_WIKI}" ]
+then
+	if [ ! -f "${_FILE_SYNC}" ]
+	then
+		[ -f "${_DIR_WIKI}/extra.exclude" ] && export _EXTRA_EXCLUDE="--exclude-from=${_DIR_WIKI}/extra.exclude"
+		rsync -crlDog --delete --exclude-from=/mediawiki.exclude ${_EXTRA_EXCLUDE} ${_DIR_HTML} ${_DIR_WIKI}
+		touch ${_FILE_SYNC}
+	fi
+fi
+
+# first arg is `-f` or `--some-option`
+if [ "${1#-}" != "$1" ]; then
+        set -- php-fpm "$@"
+fi
+
+exec "$@"
