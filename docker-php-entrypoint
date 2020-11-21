@@ -11,6 +11,7 @@ then
 	then
 		[ -f "${_DIR_WIKI}/extra.exclude" ] && export _EXTRA_EXCLUDE="--exclude-from=${_DIR_WIKI}/extra.exclude"
 		rsync -crlDog --delete --exclude-from=/mediawiki.exclude ${_EXTRA_EXCLUDE} ${_DIR_HTML} ${_DIR_WIKI}
+		sed -i 's#/var/www/html#/var/www/wiki#' /etc/apache2/*-available/*.conf
 		touch ${_FILE_SYNC}
 	fi
 fi
