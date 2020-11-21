@@ -1,7 +1,7 @@
 Docker docker-mediawiki
 ============
 
-Configuration Docker with mediawiki:stable-fpm with package rsync and extension mediawiki PCRGUIInserts
+Configuration Docker with mediawiki:latest with package rsync, diffutils and extension mediawiki PCRGUIInserts
 
 Quick Start
 ===========
